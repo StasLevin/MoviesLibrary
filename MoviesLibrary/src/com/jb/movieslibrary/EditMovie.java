@@ -45,6 +45,7 @@ public class EditMovie extends Activity implements OnClickListener{
 			edits[1].setText(movie.getBody());
 			edits[2].setText(movie.getUri().toString());
 		}
+		edits[0].requestFocus();
 	}
 
 	@Override

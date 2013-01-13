@@ -73,6 +73,11 @@ public class Movie implements Parcelable{
 		return 0;
 	}
 
+	@Override
+	public String toString() {
+		return subject;
+	}
+
 	public void readFromParcel(Parcel source) {
 		_id = source.readInt();
 		subject = source.readString();

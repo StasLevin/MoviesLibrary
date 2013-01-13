@@ -19,9 +19,9 @@ import android.widget.ListView;
 
 public class MoviesMainActivity extends Activity implements OnClickListener, OnItemClickListener, OnItemLongClickListener {
 
-	private ArrayList<String> movies = new ArrayList<String>();
+	private ArrayList<Movie> movies = new ArrayList<Movie>();
 	private MoviesDBHandler db = new MoviesDBHandler(this);
-	ArrayAdapter<String> moviesAdapter = null;
+	ArrayAdapter<Movie> moviesAdapter = null;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +48,8 @@ public class MoviesMainActivity extends Activity implements OnClickListener, OnI
     }
     
     public void showMovies() {
-    	movies = db.getAllMoviesNames();
-		moviesAdapter = new ArrayAdapter<String>(this, 
+    	movies = db.getAllMovies();
+		moviesAdapter = new ArrayAdapter<Movie>(this, 
 				android.R.layout.simple_list_item_1, movies);
 		moviesAdapter.notifyDataSetChanged();
 
@@ -97,9 +97,12 @@ public class MoviesMainActivity extends Activity implements OnClickListener, OnI
 	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 		// TODO Auto-generated method stub
-		Intent i = new Intent(MoviesMainActivity.this, EditMovie.class);
-//		i.set
 		
+		Movie movie = (Movie)parent.getItemAtPosition(position);
+		Intent i = new Intent(MoviesMainActivity.this, EditMovie.class);
+		i.putExtra("edit", true);
+//		i.putParcelableArrayListExtra(name, value);
+		startActivity(i);
 		
 	}
 
@@ -107,6 +110,7 @@ public class MoviesMainActivity extends Activity implements OnClickListener, OnI
 	public boolean onItemLongClick(AdapterView<?> parent, View v, int position,
 			long id) {
 		// TODO Auto-generated method stub
+//		getMenuInflater().inflate(R.menu.movies_main_context_menu, menu);
 		int i = 0;
 		i = 1;
 		return false;
