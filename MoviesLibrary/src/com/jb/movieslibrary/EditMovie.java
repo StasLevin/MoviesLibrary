@@ -59,9 +59,18 @@ public class EditMovie extends Activity implements OnClickListener{
 		Intent i;
 		switch (v.getId()) {
 		case R.id.button0:
-			Movie movie = new Movie(edits[0].getEditableText().toString(),
-					edits[1].getEditableText().toString(), Uri.parse(edits[2].getEditableText().toString()));
-			db.addMovie(movie);
+			i = getIntent();
+			boolean isEdit = i.getBooleanExtra("edit", false);
+			if (isEdit) {
+				db.updateMovie(new Movie( ((Movie)i.getParcelableExtra("movie")).get_id(), edits[0].getEditableText().toString(),
+						edits[1].getEditableText().toString(), Uri.parse(edits[2].getEditableText().toString())));
+			} else {
+				db.addMovie(new Movie(edits[0].getEditableText().toString(),
+					edits[1].getEditableText().toString(), Uri.parse(edits[2].getEditableText().toString())));
+			}
+//			Movie movie = new Movie(edits[0].getEditableText().toString(),
+//					edits[1].getEditableText().toString(), Uri.parse(edits[2].getEditableText().toString()));
+//			db.addMovie(movie);
 			i = new Intent(EditMovie.this, MoviesMainActivity.class);
 			startActivity(i);
 			break;

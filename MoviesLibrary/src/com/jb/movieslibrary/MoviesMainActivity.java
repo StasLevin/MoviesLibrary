@@ -101,6 +101,7 @@ public class MoviesMainActivity extends Activity implements OnClickListener, OnI
 		Movie movie = (Movie)parent.getItemAtPosition(position);
 		Intent i = new Intent(MoviesMainActivity.this, EditMovie.class);
 		i.putExtra("edit", true);
+		i.putExtra("movie", movie);
 //		i.putParcelableArrayListExtra(name, value);
 		startActivity(i);
 		
