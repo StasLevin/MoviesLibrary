@@ -68,9 +68,6 @@ public class EditMovie extends Activity implements OnClickListener{
 				db.addMovie(new Movie(edits[0].getEditableText().toString(),
 					edits[1].getEditableText().toString(), Uri.parse(edits[2].getEditableText().toString())));
 			}
-//			Movie movie = new Movie(edits[0].getEditableText().toString(),
-//					edits[1].getEditableText().toString(), Uri.parse(edits[2].getEditableText().toString()));
-//			db.addMovie(movie);
 			i = new Intent(EditMovie.this, MoviesMainActivity.class);
 			startActivity(i);
 			break;

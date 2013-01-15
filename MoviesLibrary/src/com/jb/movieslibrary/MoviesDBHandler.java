@@ -73,8 +73,8 @@ public class MoviesDBHandler {
 		return movies;
 	}
 	
-	public long addMovie (Movie movie) {
-		long result = -1;
+	public boolean addMovie (Movie movie) {
+		boolean result = false;
 		Log.i(MoviesConstants.LOG_TAG, "Insert " + movie.toString() + " to DB");
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		
@@ -83,7 +83,7 @@ public class MoviesDBHandler {
 			values.put("subject", movie.getSubject());
 			values.put("body", movie.getBody());
 			values.put("uri", movie.getUri().toString());
-			result = db.insert(MoviesConstants.MOVIES_TABLE, null, values);	
+			result = db.insert(MoviesConstants.MOVIES_TABLE, null, values) > 0;	
 		} catch (Exception e) {
 			Log.e(MoviesConstants.LOG_TAG, "SQL exception: " + e.getMessage() + e.getStackTrace());
 		} finally {
@@ -93,8 +93,8 @@ public class MoviesDBHandler {
 		return result;
 	}
 	
-	public long updateMovie (Movie movie) {
-		long result = -1;
+	public boolean updateMovie (Movie movie) {
+		boolean result = false;
 		Log.i(MoviesConstants.LOG_TAG, "Update existing move: " + movie.toString());
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		
@@ -103,7 +103,7 @@ public class MoviesDBHandler {
 			values.put("subject", movie.getSubject());
 			values.put("body", movie.getBody());
 			values.put("uri", movie.getUri().toString());
-			result = db.update(MoviesConstants.MOVIES_TABLE, values, "where '_id = '" + movie.get_id(), null);	
+			result = db.update(MoviesConstants.MOVIES_TABLE, values, "_id = " + movie.get_id(), null) > 0;	
 		} catch (Exception e) {
 			Log.e(MoviesConstants.LOG_TAG, "SQL exception: " + e.getMessage() + e.getStackTrace());
 		} finally {
@@ -113,13 +113,31 @@ public class MoviesDBHandler {
 		return result;
 	}
 	
-	public boolean removeAll() {
+	public boolean deleteMovie (Movie movie) {
+		boolean result = false;
+		Log.i(MoviesConstants.LOG_TAG, "Update existing move: " + movie.toString());
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		
+		try {
+			result = db.delete(MoviesConstants.MOVIES_TABLE, "_id = " + movie.get_id(), null) > 0;	
+		} catch (Exception e) {
+			Log.e(MoviesConstants.LOG_TAG, "SQL exception: " + e.getMessage() + e.getStackTrace());
+		} finally {
+			if (db.isOpen())
+				db.close();
+		}
+		return result;
+	}
+	
+	public boolean removeAllMovies() {
+		boolean result = false;
 		Log.i(MoviesConstants.LOG_TAG, "Removing all objects from " + MoviesConstants.MOVIES_TABLE);
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
-		boolean result = false;
+		
 		try {
-			db.execSQL("Delete From " + MoviesConstants.MOVIES_TABLE);
-			result = true;
+			result = db.delete(MoviesConstants.MOVIES_TABLE, null, null) > 0;
+//			db.execSQL("Delete From " + MoviesConstants.MOVIES_TABLE);
+//			result = true;
 		} catch (Exception e) {
 			Log.e(MoviesConstants.LOG_TAG, e.getMessage() + " " + e.getStackTrace());
 		} finally {
