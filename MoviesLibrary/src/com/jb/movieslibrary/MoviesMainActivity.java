@@ -35,10 +35,10 @@ public class MoviesMainActivity extends Activity implements OnClickListener, OnI
 		Button btnSettings = (Button)findViewById(R.id.button1);
 		btnSettings.setOnClickListener(this);
 		
-		showMovies();
+		showMoviesList();
     }
     
-    public void showMovies() {
+    public void showMoviesList() {
     	movies = db.getAllMovies();
 		moviesAdapter = new ArrayAdapter<Movie>(this, 
 				android.R.layout.simple_list_item_1, movies);
@@ -47,7 +47,6 @@ public class MoviesMainActivity extends Activity implements OnClickListener, OnI
 		ListView listView = (ListView)findViewById(R.id.listView1);
 		listView.setAdapter(moviesAdapter);
 		listView.setOnItemClickListener(this);
-//		listView.setOnItemLongClickListener(this);
 		registerForContextMenu(listView);
     }
 
@@ -62,7 +61,7 @@ public class MoviesMainActivity extends Activity implements OnClickListener, OnI
 			break;
 		case R.id.itemRemoveAll:
 			result = db.removeAllMovies();
-			showMovies();
+			showMoviesList();
 			result = true;
 			break;
 		}
@@ -93,16 +92,6 @@ public class MoviesMainActivity extends Activity implements OnClickListener, OnI
 		startActivity(i);
 		
 	}
-
-//	@Override
-//	public boolean onItemLongClick(AdapterView<?> parent, View v, int position,
-//			long id) {
-//		// TODO Auto-generated method stub
-////		getMenuInflater().inflate(R.menu.movies_main_context_menu, menu);
-//		int i = 0;
-//		i = 1;
-//		return false;
-//	}
 	
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -123,19 +112,19 @@ public class MoviesMainActivity extends Activity implements OnClickListener, OnI
 		boolean result = false;
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
 		int position = (int)info.position;
-//		Movie movie = getResources().;
+		Movie movie = moviesAdapter.getItem(position);
 		switch (item.getItemId()) {
 		case R.id.itemEditMovie:
-//			result = db.
-//			Movie movie = (Movie)parent.getItemAtPosition(position);
 			Intent i = new Intent(MoviesMainActivity.this, EditMovie.class);
 			i.putExtra("edit", true);
-//			i.putExtra("movie", movie);
+			i.putExtra("movie", movie);
 			startActivity(i);
+			result = true;
 			break;
 		case R.id.itemDeleteMovie:
-			// TODO
-//			result = db.deleteMovie(movie);
+			result = db.deleteMovie(movie);
+			moviesAdapter.notifyDataSetChanged();
+			showMoviesList();
 			break;
 		default:
 			return super.onContextItemSelected(item);

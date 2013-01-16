@@ -26,6 +26,10 @@
             android:name="com.jb.movieslibrary.EditMovie"
             android:label="@string/title_activity_edit_movie" >
         </activity>
+        <activity
+            android:name="com.jb.movieslibrary.WebSearchActivity"
+            android:label="@string/title_activity_web_search" >
+        </activity>
     </application>
 
 </manifest>

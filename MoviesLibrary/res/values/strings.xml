@@ -11,8 +11,12 @@
     <string name="btnShow">Show</string>
     <string name="textMovies">My Movies</string>
     <string name="btnSettings">Settings</string>
-    <string name="btnPlus">+</string>
+    <string name="btnPlus"> + </string>
     <string name="itemExit">Exit</string>
     <string name="itemRemoveAll">Remove All</string>
+    <string name="title_activity_web_search">WebSearchActivity</string>
+    <string name="btnGo">GO</string>
+    <string name="txtSearch">Search:</string>
+    <string name="enter_movie_s_name">Enter movie\'s name</string>
 
 </resources>

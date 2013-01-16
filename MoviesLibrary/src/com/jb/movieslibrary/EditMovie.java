@@ -4,7 +4,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -48,16 +47,17 @@ public class EditMovie extends Activity implements OnClickListener{
 		edits[0].requestFocus();
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_edit_movie, menu);
-		return true;
-	}
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		// Inflate the menu; this adds items to the action bar if it is present.
+//		getMenuInflater().inflate(R.menu.activity_edit_movie, menu);
+//		return true;
+//	}
 	
 	public void onClick(View v) {
 		Intent i;
 		switch (v.getId()) {
+		// "OK" button
 		case R.id.button0:
 			i = getIntent();
 			boolean isEdit = i.getBooleanExtra("edit", false);
@@ -71,10 +71,12 @@ public class EditMovie extends Activity implements OnClickListener{
 			i = new Intent(EditMovie.this, MoviesMainActivity.class);
 			startActivity(i);
 			break;
+		// "Cancel" button
 		case R.id.button1:
 			i = new Intent(EditMovie.this, MoviesMainActivity.class);
 			startActivity(i);
 			break;
+		// "Show" button
 		case R.id.button2:
 			//TODO
 			

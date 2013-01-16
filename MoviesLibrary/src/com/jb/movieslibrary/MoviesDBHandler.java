@@ -136,8 +136,6 @@ public class MoviesDBHandler {
 		
 		try {
 			result = db.delete(MoviesConstants.MOVIES_TABLE, null, null) > 0;
-//			db.execSQL("Delete From " + MoviesConstants.MOVIES_TABLE);
-//			result = true;
 		} catch (Exception e) {
 			Log.e(MoviesConstants.LOG_TAG, e.getMessage() + " " + e.getStackTrace());
 		} finally {
