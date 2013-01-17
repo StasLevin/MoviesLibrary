@@ -11,13 +11,15 @@ import android.widget.EditText;
 
 public class EditMovie extends Activity implements OnClickListener{
 	
-	private String editables[] = {"subject", "body", "uri"};
+//	private String editables[] = {"subject", "body", "uri"};
+	private int editables [] = {R.id.editText0, R.id.editText1, R.id.editText2};
 	private EditText edits[] = new EditText[editables.length];
-	private int editNames [] = {R.id.editText0, R.id.editText1, R.id.editText2};
 	
-	private String buttons[] = {"OK", "Cancel", "Show"};
+	
+//	private String buttons[] = {"OK", "Cancel", "Show"};
+	private int buttons[] = {R.id.button0, R.id.button1, R.id.button2};
 	private Button btns [] = new Button [buttons.length];
-	private int btnNames[] = {R.id.button0, R.id.button1, R.id.button2};
+	
 	
 	private MoviesDBHandler db = new MoviesDBHandler(this);
 	
@@ -27,11 +29,11 @@ public class EditMovie extends Activity implements OnClickListener{
 		setContentView(R.layout.activity_edit_movie);
 		
 		for (int i = 0; i < editables.length; i++) {
-			edits[i] = (EditText)findViewById(editNames[i]);
+			edits[i] = (EditText)findViewById(editables[i]);
 		}
 
 		for (int i = 0; i < buttons.length; i++) {
-			btns[i] = (Button)findViewById(btnNames[i]);
+			btns[i] = (Button)findViewById(buttons[i]);
 			btns[i].setOnClickListener(this);
 		}
 		
@@ -39,7 +41,6 @@ public class EditMovie extends Activity implements OnClickListener{
 		boolean isEdit = i.getBooleanExtra("edit", false);
 		if (isEdit) {
 			Movie movie = i.getParcelableExtra("movie");
-			//TODO
 			edits[0].setText(movie.getSubject());
 			edits[1].setText(movie.getBody());
 			edits[2].setText(movie.getUri().toString());
@@ -47,13 +48,6 @@ public class EditMovie extends Activity implements OnClickListener{
 		edits[0].requestFocus();
 	}
 
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.activity_edit_movie, menu);
-//		return true;
-//	}
-	
 	public void onClick(View v) {
 		Intent i;
 		switch (v.getId()) {

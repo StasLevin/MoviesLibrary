@@ -3,6 +3,9 @@ package com.jb.movieslibrary;
 import java.util.ArrayList;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -13,7 +16,6 @@ import android.view.View.*;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.AdapterContextMenuInfo;
-//import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -104,7 +106,8 @@ public class MoviesMainActivity extends Activity implements OnClickListener, OnI
 			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
 		getMenuInflater().inflate(R.menu.movies_main_context_menu, menu);
-		menu.setHeaderTitle("Select Option");
+//		menu.setHeaderTitle("Select Option");
+		menu.setHeaderTitle(R.string.contextMenuTitle);
 	}
 	
 	@Override
@@ -131,5 +134,22 @@ public class MoviesMainActivity extends Activity implements OnClickListener, OnI
 		}
 		
 		return result;
+	}
+
+	@Override
+	public Dialog onCreateDialog(int id, Bundle args) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Add new movie");
+		builder.setSingleChoiceItems(R.array.addMovieDialog, 1, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				int selection = R.array.addMovieDialog;
+				
+				
+			}
+		});
+		return builder.create();
 	}
 }

@@ -2,21 +2,41 @@
 <resources>
 
     <string name="app_name">MoviesLibrary</string>
+    
     <string name="menu_settings">Settings</string>
     <string name="title_activity_edit_movie">Edit Movie Properies</string>
+    <string name="title_activity_web_search">WebSearchActivity</string>
+    
     <string name="btnOK">OK</string>
     <string name="btnCancel">Cancel</string>
-    <string name="txtUri">URL</string>
-    <string name="txtSubject">Movie:</string>
     <string name="btnShow">Show</string>
-    <string name="textMovies">My Movies</string>
     <string name="btnSettings">Settings</string>
     <string name="btnPlus"> + </string>
+    <string name="btnGo">GO</string>
+    
+    <string name="txtUri">URL</string>
+    <string name="txtSubject">Movie:</string>
+    <string name="textMovies">My Movies</string>
+    <string name="txtSearch">Search:</string>
+    
     <string name="itemExit">Exit</string>
     <string name="itemRemoveAll">Remove All</string>
-    <string name="title_activity_web_search">WebSearchActivity</string>
-    <string name="btnGo">GO</string>
-    <string name="txtSearch">Search:</string>
+    
+    <string name="contextMenuTitle">Select Option</string>
+    
     <string name="enter_movie_s_name">Enter movie\'s name</string>
+    
+    <string-array name="addMovieDialog">
+        <item >Add Manually</item>
+        <item >Add from Internet</item>
+    </string-array>
+    <string-array name="contextMenu">
+        <item >Edit Movie</item>
+        <item >Delete Movie</item>
+    </string-array>
+    <string-array name="optionsMenu">
+        <item >Exit</item>
+        <item >Remove All</item>
+    </string-array>
 
 </resources>
